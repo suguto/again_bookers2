@@ -12,6 +12,9 @@
 
   <body>
     <%= render 'layouts/header' %>
+    <%= notice do %>
+      <i class="fas fa-badge-check"></i>
+    <% end %>
     <%= yield %>
 
     <%= render 'layouts/footer' %>

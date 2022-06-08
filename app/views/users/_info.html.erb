@@ -1,5 +1,6 @@
 <h2>User info</h2>
 <table class="table">
+  
 
     <tr><%= image_tag user.get_profile_image, size: "100x100" %></tr>
     <tr>
@@ -10,7 +11,7 @@
       <th>introduction</th>
       <th><%= user.introduction %></th>
     </tr>
-    <th><%= link_to edit_user_path do %>
+    <th><%= link_to edit_user_path(user) do %>
         <i class="fas fa-user-edit"></i>
         <% end %>
     </th>
@@ -26,5 +27,6 @@
     <%= f.label :opinion %>
     <%= f.text_area :body, class: "form-controll" %>
   </div>
+  <%= f.submit "create book", class: "btn btn-sm btn-success" %>
 <% end %>
 

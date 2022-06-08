@@ -2,11 +2,12 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @book = Book.new
+    @books = @user.books
   end
 
   def index
     @users = User.all
-    @book.new
+    @book = Book.new
   end
 
   def edit
@@ -14,14 +15,18 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = find(params[:id])
-    @user.update(user_params)
-    redirect user_path(@user)
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      flash[:notice] = "successfully 編集★"
+      redirect_to user_path(@user)
+    else
+      render 'edit'
+    end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :introdution, :profile_image)
+    params.require(:user).permit(:name, :introduction, :profile_image)
   end
 end
