@@ -1,0 +1,30 @@
+          <tr>
+            <td><%= link_to user_path(user) do %>
+                  <%= image_tag user.get_profile_image, size: "100x100" %><br>
+                  <%= user.name %>
+                <% end %>
+            </td>
+            <td><%= link_to book.title, book_path(book) %></td>
+            <td><%= book.body %></td>
+
+            <%= render 'favorites/favorite', book: book %>
+
+            <td>コメント数:<%= book.book_comments.count %></td>
+
+            <% if book.user == current_user %>
+              <td>
+                <%= link_to "Edit", edit_book_path(book), class: "btn btn-sm btn-success" %>
+              </td>
+              <td>
+                <%= link_to "Destroy", book_path(book), class: "btn btn-sm btn-danger", method: :delete, data: { confirm: 'Are you sure?'} %>
+              </td>
+            <% end %>
+          </tr>
+
+          <% book.book_comments.each do |b| %>
+            <tr>
+              <td><%= image_tag current_user.get_profile_image, size: "50x50" %></td>
+              <td><%= b.comment %></td>
+              <td><%= link_to "Destroy", book_book_comment_path(b, book), method: :delete, class: "btn btn-sm btn-danger", remote: true %></td>
+            </tr>
+          <% end %>
